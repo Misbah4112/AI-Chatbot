@@ -22,7 +22,11 @@ create_tables()
 
 # Step 1: Load the API key
 load_dotenv()
+
 groq_api_key = os.getenv("GROQ_API_KEY")
+
+if not groq_api_key:
+    groq_api_key = st.secrets["GROQ_API_KEY"]
 
 # Step 2: Configure Streamlit
 st.set_page_config(page_title="AI Assistant", page_icon="🤖", layout="wide")
@@ -74,7 +78,6 @@ model_options = {
     "GPT-OSS 120B": "openai/gpt-oss-120b",
 }
 
-# Step 5: Initialize conversation state before accessing it
 # Step 5: Initialize conversation state
 
 # Load existing conversations from SQLite
